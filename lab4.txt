@@ -1,0 +1,56 @@
+    1  mkdir ~/lab4
+    2  cd ~/lab4
+    3  nano hello.c
+    4  nano Makefile
+    5  export KDIR=$HOME/repos/linux-stable
+    6  $KDIR/scripts/checkpatch.pl -f hello.c
+    7  nano hello.c
+    8  $KDIR/scripts/checkpatch.pl -f hello.c
+    9  nano hello.c
+   10  $KDIR/scripts/checkpatch.pl -f hello.c
+   11  nano hello.c
+   12  $KDIR/scripts/checkpatch.pl -f hello.c
+   13  nano hello.c
+   14  $KDIR/scripts/checkpatch.pl -f hello.c
+   15  nano hello.c
+   16  $KDIR/scripts/checkpatch.pl -f hello.c
+   17  nano hello.c
+   18  $KDIR/scripts/checkpatch.pl -f hello.c
+   19  nano hello.c
+   20  $KDIR/scripts/checkpatch.pl -f hello.c
+   21  export KDIR=$HOME/repos/linux-stable
+   22  make
+   23  cd /home/koval/repos/linux-stable
+   24  make clean
+   25  git checkout linux-4.19.y
+   26  export PATH=/opt/gcc-arm-8.3-2019.03-x86_64-arm-eabi/bin:$PATH
+   27  export CROSS_COMPILE='ccache arm-eabi-'
+   28  export ARCH=arm
+   29  ./scripts/kconfig/merge_config.sh arch/arm/configs/multi_v7_defconfig fragments/bbb.cfg
+   30  make -j4 zImage modules am335x-boneblack.dtb
+   31  cd /lab4
+   32  cd ../lab4
+   33  cd ~/lab4
+   34  export KDIR=$HOME/repos/linux-stable
+   35  make
+   36  ls
+   37  mv hello.ko ~/repos/busybox/_install
+   38  ls
+   39  cd ~/repos/busybox/_install
+   40  ls
+   41  find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz
+   42  cd ~/repos/busybox
+   43  qemu-system-arm -kernel _install/boot/zImage -initrd rootfs.cpio.gz -machine virt -nographic -m 512 --append "root=/dev/ram0 rw console=ttyAMA0,115200 mem=512M"
+   44  cd ~
+   45  history > history4.txt
+
+    1  insmod hello.ko
+    2  rmmod hello.ko
+    3  insmod hello.ko print_count=0
+    4  rmmod hello.ko
+    5  insmod hello.ko print_count=7
+    6  cat /sys/module/hello/parameters/print_count
+    7  rmmod hello.ko
+    8  insmod hello.ko print_count=15
+    9  modinfo hello.ko
+   10  poweroff
